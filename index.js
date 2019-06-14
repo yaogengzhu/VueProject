@@ -1,9 +1,10 @@
 const express = require('express');
 const app = express();
 
-app.get('/', (req, res) =>{
-    console.log('ok');
-})
+// 引入route 
+const users = require('./routers/api/user');
+// 注册中间件 
+app.use('/api/users',users);
 
 // 设置默认端口为为500 
 const port = process.env.port || 5000;
