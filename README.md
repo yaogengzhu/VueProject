@@ -7,6 +7,11 @@
 - [X] `express` 
 - [x] `mysql`
 
+### 开发过程中使用的一些插件已经express的中间件 
+- [x] `md5`   加密
+- [x] `body-parser` 请求体解析中间件  [参考](https://www.jianshu.com/p/ea0122ad1ac0)
+- [x] `moment` 时间处理插件
+
 ## 开发过程细节介绍
 
 ### package.json 文件中细节处理 
