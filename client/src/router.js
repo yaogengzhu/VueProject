@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from '@/views/index';
+import Login from '@/views/login';
+import NotFound from '@/views/404'
 
 Vue.use(Router)
 
@@ -13,9 +14,15 @@ export default new Router({
       redirect:'/index'
     },
     {
-      path:'/index',
-      name:'index',
-      component:Index
+      path: '*',
+      name:'404pages',
+      component:NotFound
+    }
+    ,
+    {
+      path:'/login',
+      name:'login',
+      component:Login
     }
     // {
     //   path: '/about',
