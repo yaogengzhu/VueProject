@@ -79,9 +79,6 @@ conn.connect();
 module.exports = conn;
 ``` 
 
-
-
-
 ### 如何使用`bcrypt`方式加密 
 我在以前都是使用的md5的方式进行密码加密，由于md5存在一定的风险，而且这个这个依赖已经很久没有更新了，故本次采用的是`bcrypt`方式加密。
 
@@ -159,3 +156,87 @@ bcrypt.compare(someOtherPlaintextPassword, hash).then(function(res) {
 ```
 
 [更多方式可以参考官网](https://www.npmjs.com/package/bcrypt)
+
+### 如何使用默认头像 
+- `npm i gravatar` 
+
+usage 
+
+```js
+var gravatar = require('gravatar');
+ 
+gravatar.url(email);
+gravatar.url(email, options);
+gravatar.url(email, options, protocol);
+ 
+gravatar.profile_url(email);
+gravatar.profile_url(email, options);
+gravatar.profile_url(email, options, protocol);
+``` 
+example
+
+```js
+var gravatar = require('gravatar');
+ 
+var url = gravatar.url('emerleite@gmail.com', {s: '200', r: 'pg', d: '404'});
+//returns //www.gravatar.com/avatar/93e9084aa289b7f1f5e4ab6716a56c3b?s=200&r=pg&d=404
+ 
+var unsecureUrl = gravatar.url('emerleite@gmail.com', {s: '100', r: 'x', d: 'retro'}, false);
+//returns http://www.gravatar.com/avatar/93e9084aa289b7f1f5e4ab6716a56c3b?s=100&r=x&d=retro
+ 
+var secureUrl = gravatar.url('emerleite@gmail.com', {s: '100', r: 'x', d: 'retro'}, true);
+//returns https://s.gravatar.com/avatar/93e9084aa289b7f1f5e4ab6716a56c3b?s=100&r=x&d=retro
+ 
+var httpUrl = gravatar.url('emerleite@gmail.com', {protocol: 'http', s: '100'});
+//returns http://www.gravatar.com/avatar/93e9084aa289b7f1f5e4ab6716a56c3b?s=100
+ 
+var httpsUrl = gravatar.url('emerleite@gmail.com', {protocol: 'https', s: '100'});
+//returns https://s.gravatar.com/avatar/93e9084aa289b7f1f5e4ab6716a56c3b?s=100
+ 
+var profile1 = gravatar.profile_url('emerleite@gmail.com', {protocol: 'https'});
+//returns https://secure.gravatar.com/93e9084aa289b7f1f5e4ab6716a56c3b.json
+ 
+var profile2 = gravatar.profile_url('emerleite@gmail.com', {protocol: 'http', format:'qr'});
+//returns http://www.gravatar.com/93e9084aa289b7f1f5e4ab6716a56c3b.qr
+``` 
+[参考链接](https://www.npmjs.com/package/gravatar)
+
+注意：如果需要使用头像，必须拥有对应邮箱的账户，在`gravatar`官网注册相应的邮箱，上传相应的照片。
+
+
+
+
+### 后台代码暂时未完工 ！！
+
+
+## 前后端项目连载 
+安装依赖  
+- `npm i concurrently`
+
+配置依赖
+- 前端项目的`package.json`文件中添加以下代码 
+```js
+"scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    // 此处代码为新增代码
+    "start": "npm run serve"
+  },
+  ```
+
+  - 后端项目的`package.json`文件中添加以下代码
+  ```js
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    // 以下代码为新增代码
+    // 加载前端代码
+    "client-install":"npm install --prefix client",
+    "client":"npm start --prefix client",
+    // npm run dev  可以同时启动前后端代码 
+    "dev":"concurrently \"npm run server\" \"npm run client\""
+  },
+  ```
+
+  #### 总结：完成以上任务，就可以实现前后端连载了。
