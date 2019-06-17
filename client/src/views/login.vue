@@ -2,15 +2,15 @@
   <div id="login">
     <div class="form">
       <p class="title">果蔬后台管理系统</p>
-      <el-form  label-width="120px" class="loginForm">
+      <el-form  label-width="120px" class="loginForm" :model="loginForm" :rules="rules" ref="loginForm">
         <el-form-item label="用户名" prop="username">
-            <el-input type="text" v-model="loginForm.uesrname" palceholder="请输入用户名"></el-input>
+            <el-input type="text" v-model="loginForm.username" placeholder="请输入用户名" autofocus></el-input>
         </el-form-item>
-         <el-form-item label="密码" prop="passwod">
-            <el-input type="password" v-model="loginForm.passwod" palceholder=”请输入密码“></el-input>
+         <el-form-item label="密码" prop="password">
+            <el-input type="password" v-model="loginForm.password" placeholder="请输入密码" @keyup.enter.native="submitForm('loginForm')"></el-input>
         </el-form-item>
          <el-form-item size="large" >
-            <el-button type="primary">登陆</el-button>
+            <el-button type="primary" @click="submitForm('loginForm')">登陆</el-button>
         </el-form-item>
          <el-form-item >
              没有账号<el-link type="primary">立即注册</el-link>
@@ -27,12 +27,49 @@ export default {
   data() {
     return {
       loginForm: {
-        uesrname: "",
+        username: "",
         password: "",
-      }  
+      },
+      rules:{
+        username:[
+          { required: true, message: '请输入用户名', trigger: 'blur' }
+        ],
+        password:[
+          // 校验字段
+          {required: true, message: '请输入用户密码', trigger: 'blur'},
+          // 校验类型
+        ]
+      }
     };
   },
   methods: {
+       submitForm(formName) {
+        console.log('ok')
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            // 校验成功，进行下一步
+            if(this.loginForm.username === 'admin' && this.loginForm.password === '123456') {
+              this.$message({
+                // 可点击关闭
+                showClose:true,
+                message:'登陆成功',
+                type:'success'
+              })
+            } else {
+              this.$message({
+                 showClose:true,
+                message:'登陆失败',
+                type:'error'
+              })
+            }
+            
+            
+          } else {
+            // console.log('error submit!!');
+            return false;
+          }
+        });
+      },
   }
 };
 </script>
