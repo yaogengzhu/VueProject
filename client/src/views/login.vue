@@ -13,7 +13,7 @@
             <el-button type="primary" @click="submitForm('loginForm')">登陆</el-button>
         </el-form-item>
          <el-form-item >
-             没有账号<el-link type="primary">立即注册</el-link>
+             没有账号<el-link type="primary" @click="jumpToRegister">立即注册</el-link>
         </el-form-item>
      </el-form>
     
@@ -43,8 +43,8 @@ export default {
     };
   },
   methods: {
-       submitForm(formName) {
-        console.log('ok')
+      //登陆验证表单
+      submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
             // 校验成功，进行下一步
@@ -57,7 +57,7 @@ export default {
               })
             } else {
               this.$message({
-                 showClose:true,
+                showClose:true,
                 message:'登陆失败',
                 type:'error'
               })
@@ -70,6 +70,11 @@ export default {
           }
         });
       },
+      // 跳转注册页面
+      jumpToRegister(){
+        this.$router.push('/register');
+      }
+
   }
 };
 </script>

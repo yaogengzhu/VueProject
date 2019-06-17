@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/views/login';
-import NotFound from '@/views/404'
+import NotFound from '@/views/404';
+import Register from '@/views/register';
 
 Vue.use(Router)
 
@@ -17,12 +18,16 @@ export default new Router({
       path: '*',
       name:'404pages',
       component:NotFound
-    }
-    ,
+    },
     {
       path:'/login',
       name:'login',
       component:Login
+    },
+    {
+      path: '/register',
+      name:'register',
+      component: Register
     }
     // {
     //   path: '/about',
