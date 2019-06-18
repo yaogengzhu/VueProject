@@ -16,7 +16,6 @@
              没有账号<el-link type="primary" @click="jumpToRegister">立即注册</el-link>
         </el-form-item>
      </el-form>
-    
     </div>
   </div>
 </template>
@@ -55,15 +54,15 @@ export default {
                 message:'登陆成功',
                 type:'success'
               })
+              // 登陆成功就行跳转
+              this.$router.push('/home');
             } else {
               this.$message({
                 showClose:true,
                 message:'登陆失败',
                 type:'error'
               })
-            }
-            
-            
+            }    
           } else {
             // console.log('error submit!!');
             return false;
@@ -74,7 +73,6 @@ export default {
       jumpToRegister(){
         this.$router.push('/register');
       }
-
   }
 };
 </script>
