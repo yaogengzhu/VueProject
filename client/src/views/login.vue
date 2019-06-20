@@ -54,8 +54,13 @@ export default {
                 message:'登陆成功',
                 type:'success'
               })
+              // 没有处理。。。
               // 登陆成功就行跳转
-              this.$router.push('/home');
+              // this.$router.push('/home');
+              // this.axios.post('/login',{username:'admin',password:123456})
+              //   .then( res =>{
+              //     console.log(res);
+              //   })
             } else {
               this.$message({
                 showClose:true,

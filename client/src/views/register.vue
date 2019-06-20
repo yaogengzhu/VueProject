@@ -71,6 +71,7 @@ export default {
     methods:{
         // 跳转登陆
         jumpToLogin() {
+            // console.log(this.axios)
             this.$router.push('/login');
         }   
     }
