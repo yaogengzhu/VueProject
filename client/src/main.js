@@ -14,6 +14,12 @@ Vue.config.productionTip = false
 // 使用elementUi
 Vue.use(ElementUI);
 
+// 处理路由守卫
+// router.beforeEach( (to, from, next ) =>{
+//   // console.log(to)
+// })
+
+
 new Vue({
   router,
   store,
